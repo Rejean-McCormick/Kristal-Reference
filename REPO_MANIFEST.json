@@ -1,0 +1,107 @@
+{
+  "schema": "kristal-reference.repo-manifest.v1",
+  "name": "kristal-reference",
+  "version": "0.2.0",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 62,
+      "sha256": "7cd4121f971d0041f540fe66400e8711c151afb57fa564fa83b556161837948c"
+    },
+    {
+      "path": "CONTENTS.md",
+      "size": 787,
+      "sha256": "674557ba8cbef4e621413c0deaf0932c5ed71bd4ead33fd434314dc1a059d8e7"
+    },
+    {
+      "path": "README.md",
+      "size": 2539,
+      "sha256": "c68934cdaf60cd3c7e08ea591b17bbc3d80eccf5f036cccae0591f0f5a60bada"
+    },
+    {
+      "path": "RUN_TESTS.bat",
+      "size": 59,
+      "sha256": "5dfde98b6884d2828a3d53bb825af47059796d5af75db2f70b6550177be6c80e"
+    },
+    {
+      "path": "RUN_TESTS.ps1",
+      "size": 83,
+      "sha256": "33b7f6aff8c8c4f843ae6f3c66404fbdb7e5d919793c8c4e7d31156fc8ab0b35"
+    },
+    {
+      "path": "VERSION",
+      "size": 6,
+      "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+    },
+    {
+      "path": "bin/kristal-ref.mjs",
+      "size": 172,
+      "sha256": "5becbba655e9b6cfa9af5f2a1a25f72fb44b725195a31bf3320677a3f403c483"
+    },
+    {
+      "path": "docs/ADAPTER_CONTRACT.md",
+      "size": 1893,
+      "sha256": "80fe7b52f6e6d71b65f8d9ed840ba878ff5967958aa8b19c2d806838fe17ada6"
+    },
+    {
+      "path": "docs/status/2026-09-16-initial-reference-implementation.md",
+      "size": 694,
+      "sha256": "2d6b60b8cb66b86a219b9d0d24151b215683d96ab9727092c3ed4098cd5c2535"
+    },
+    {
+      "path": "docs/status/2026-09-16-runtime-pack-portable-conformance.md",
+      "size": 676,
+      "sha256": "011e2d2f6525e57bc48f575c47fdf86aecb838de60010a609656965db7b98746"
+    },
+    {
+      "path": "package.json",
+      "size": 342,
+      "sha256": "6b41700aae470ad0f6058fe6c2e6966cf118fd6834aa55ec0424853f0685fdc4"
+    },
+    {
+      "path": "src/cli.mjs",
+      "size": 3659,
+      "sha256": "88f928ebc8bc8977071007d26ee1392323f2ed894f1ec98badeb1a7c1aac9cbc"
+    },
+    {
+      "path": "src/exchange.mjs",
+      "size": 1330,
+      "sha256": "808d2b04396f0ce921ee45b0553ae5e441af9c5c581cca742fbfeaf1fb2c4bf8"
+    },
+    {
+      "path": "src/hash.mjs",
+      "size": 214,
+      "sha256": "9e7b29f4eec9bfdb35d1c222fac2b57f82299afaefec70e5520071f39b6fc50e"
+    },
+    {
+      "path": "src/io.mjs",
+      "size": 370,
+      "sha256": "5e75bb14f71c96be65e2a3deb34398dbc795cd7f6366f5b50e2f49a64ab0fc0e"
+    },
+    {
+      "path": "src/jcs.mjs",
+      "size": 1957,
+      "sha256": "34d37d9219a00e143bcd7a9a4eed6f7b792599a8b1937090929242f94b24ad52"
+    },
+    {
+      "path": "src/runtime_pack.mjs",
+      "size": 3169,
+      "sha256": "e228fe58c3ab3b0d476bbbb94a51e9c16f3c14cff78a2616cd5ff7599ee017d7"
+    },
+    {
+      "path": "src/runtime_pack_portable.mjs",
+      "size": 11457,
+      "sha256": "75c3bebdbfcea5c8ab068fef3922a5dd91ed0b6d638f3054daa432dfc38d66a3"
+    },
+    {
+      "path": "src/security.mjs",
+      "size": 2091,
+      "sha256": "3a229ba60eff8303ce6ac5923f55cfbfd74a3202e2d7e32a7e3eacbf221f56c5"
+    },
+    {
+      "path": "tests/run_tests.mjs",
+      "size": 6392,
+      "sha256": "16829c2823aeb4f5bc47f3f6b466c102e9a66fa64f79487968cfbc06c5eeba19"
+    }
+  ]
+}
