@@ -6,6 +6,8 @@ import { exchangeIdentity, verifyExchange } from './exchange.mjs';
 import { buildRuntimePackFromRequest, verifyRuntimePack } from './runtime_pack.mjs';
 import { verifySignatureFixture, verifyTrustFixture } from './security.mjs';
 import { verifyPortableVector } from './runtime_pack_portable.mjs';
+import { verifyReferentRegistry } from './referent_registry.mjs';
+import { verifyKnowledgeModelContract } from './knowledge_model_contract.mjs';
 import { readJson, printJson, unwrapVector } from './io.mjs';
 
 function die(message, code = 2) {
@@ -69,6 +71,15 @@ export async function main(argv = process.argv.slice(2)) {
       const file = requireArg(args, 0, 'trust fixture JSON');
       return resultExit(verifyTrustFixture(readJson(file)));
     }
+    case 'verify-referent-registry': {
+      const file = requireArg(args, 0, 'Referent Registry JSON');
+      return resultExit(verifyReferentRegistry(readJson(file)));
+    }
+    case 'verify-knowledge-model-contract': {
+      const file = requireArg(args, 0, 'knowledge-model contract JSON');
+      const frameworkRoot = args[1] ? path.resolve(args[1]) : path.resolve(path.dirname(file));
+      return resultExit(verifyKnowledgeModelContract(readJson(file), frameworkRoot));
+    }
     case 'self-test': {
       const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kristal-ref-selftest-'));
       try {
@@ -90,6 +101,6 @@ export async function main(argv = process.argv.slice(2)) {
       return;
     }
     default:
-      die('usage: kristal-ref <exchange-id|verify-exchange|build-runtime-pack|verify-runtime-pack|verify-runtime-profile|verify-signature|verify-trust|self-test> ...');
+      die('usage: kristal-ref <exchange-id|verify-exchange|build-runtime-pack|verify-runtime-pack|verify-runtime-profile|verify-signature|verify-trust|verify-referent-registry|verify-knowledge-model-contract|self-test> ...');
   }
 }

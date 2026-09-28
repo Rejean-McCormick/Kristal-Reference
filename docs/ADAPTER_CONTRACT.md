@@ -53,3 +53,17 @@ Fixture fields:
 ### `verify-trust <fixture>`
 
 Trust fixtures contain a verification instant, key ID, signature material, trust roots, and optional revocations. The verifier rejects missing roots, not-yet-valid keys, expired keys, effective revocations, and invalid signatures.
+
+## Referent Registry
+
+### `verify-referent-registry <registry>`
+
+Validates the frozen `kristal.referent-registry/1.0.0` structural contract without importing framework implementation code. It checks the rc.3 profile metadata, stable namespaced refs, shallow kind vocabulary, labels, external identifiers and closed-object fields.
+
+The command does not create domain ontology. A domain-specific classification may appear in `classifications` or extensions but is not accepted as a new core `kind`.
+
+## Knowledge-model bundle
+
+### `verify-knowledge-model-contract <contract> [framework-root]`
+
+Recomputes the content-addressed bundle ID for `kristal.knowledge-model-contract/v1` and, when a framework root is supplied or inferred, verifies every listed file SHA-256 and byte size.

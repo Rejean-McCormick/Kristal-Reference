@@ -9,6 +9,8 @@ import { exchangeIdentity, verifyExchange } from '../src/exchange.mjs';
 import { buildRuntimePackFromRequest, runtimePackIdentity, verifyRuntimePack } from '../src/runtime_pack.mjs';
 import { verifySignatureFixture, verifyTrustFixture } from '../src/security.mjs';
 import { verifyPortableVector } from '../src/runtime_pack_portable.mjs';
+import { verifyReferentRegistry } from '../src/referent_registry.mjs';
+import { verifyKnowledgeModelContract } from '../src/knowledge_model_contract.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '..');
@@ -83,6 +85,24 @@ for (const v of portableDoc.vectors ?? []) {
   const result = verifyPortableVector(v);
   assert(`Runtime Pack portable ${v.id}`, result.ok, result.issues.join(','));
 }
+
+// Referent Registry 1.0.0 conformance adapter.
+const referentExample = readJson(path.join(framework, 'docs', 'Technical-Reference', 'kristal-docs-v5', '10-examples', 'referent-registry.example.json'));
+const referentResult = verifyReferentRegistry(referentExample);
+assert('Referent Registry example accepted', referentResult.ok, referentResult.issues.join(','));
+const invalidReferent = cloneJson(referentExample);
+invalidReferent.referents[0].kind = 'organization';
+assert('Referent Registry rejects non-core kind', !verifyReferentRegistry(invalidReferent).ok);
+const wikidataAsIdentity = cloneJson(referentExample);
+wikidataAsIdentity.referents[0].ref = 'Q8018';
+assert('Referent Registry requires stable namespaced ref', !verifyReferentRegistry(wikidataAsIdentity).ok);
+
+// Frozen knowledge-model contract pin used by downstream consumers such as kOA.
+const knowledgeContractPath = path.join(framework, 'knowledge-model-contract.v1.json');
+const knowledgeContract = readJson(knowledgeContractPath);
+const knowledgeResult = verifyKnowledgeModelContract(knowledgeContract, framework);
+assert('Knowledge-model contract bundle verified', knowledgeResult.ok, knowledgeResult.issues.join(','));
+assert('Knowledge-model bundle pin', knowledgeResult.bundle_sha256 === 'sha256:07fe0527ab29a4b40870efdd0c9e0c67c91de919e5428047245b2a2c04f8ea98', knowledgeResult.bundle_sha256);
 
 // Security adapter tests.
 const { publicKey, privateKey } = crypto.generateKeyPairSync('ed25519');
