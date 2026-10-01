@@ -1,22 +1,32 @@
 {
   "schema": "kristal-reference.repo-manifest.v1",
   "name": "kristal-reference",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "files": [
     {
       "path": ".gitignore",
-      "size": 62,
-      "sha256": "7cd4121f971d0041f540fe66400e8711c151afb57fa564fa83b556161837948c"
+      "size": 275,
+      "sha256": "4bfd0122058d041004755b1b752d9343a6c3b9df03a005cd525c49a8e9905954"
+    },
+    {
+      "path": ".smartignore",
+      "size": 128,
+      "sha256": "f95bb63dd6d3281e00449e078897a56033df6a843b0cc54012a5ec0ef63ee4f9"
     },
     {
       "path": "CONTENTS.md",
-      "size": 964,
-      "sha256": "b0627361b01138e2fa593fb94d874a8602946afb12ca8b677d80e5ad3ac12b19"
+      "size": 1221,
+      "sha256": "9e13c0f014b0f542d5237aaec7f465bb8682d3be63d8db38bae40a1b80d72b08"
+    },
+    {
+      "path": "GitSink.bat",
+      "size": 781,
+      "sha256": "15b0af32d211ff210de0ed87eb4b374cf41f9302d92baf82a464a518ffe2c97e"
     },
     {
       "path": "README.md",
-      "size": 3622,
-      "sha256": "5fb2d2300f0a7445ea3575455b211bc52fd709bf461ab654cdefa7ea38f09af2"
+      "size": 1784,
+      "sha256": "8ab2561213ed26de68403d41d86586372cefcab5ef573813a4c40d608769ee98"
     },
     {
       "path": "RUN_TESTS.bat",
@@ -29,9 +39,14 @@
       "sha256": "33b7f6aff8c8c4f843ae6f3c66404fbdb7e5d919793c8c4e7d31156fc8ab0b35"
     },
     {
+      "path": "SmartSnap.pyw",
+      "size": 21444,
+      "sha256": "76de9d24b5d23c0e0ef4640d742abbb8797b1456ee308eb2bbfe4ab0447c7326"
+    },
+    {
       "path": "VERSION",
       "size": 6,
-      "sha256": "d915cc95d6ca8f47ae297713ed46d4e5c5d99ddd29fc3c61e263bdf305f2b5b0"
+      "sha256": "40b8eb4000a913a7791090535f291d3d369874162a89ef3c9e3d4e887a1b9e79"
     },
     {
       "path": "bin/kristal-ref.mjs",
@@ -40,33 +55,43 @@
     },
     {
       "path": "docs/ADAPTER_CONTRACT.md",
-      "size": 2673,
-      "sha256": "fcd7b1a0060e3a51fdc603c508ce7618b9fb65006c037cb9adff493bb56e39e6"
+      "size": 1364,
+      "sha256": "4e7f71386d81fe8da4f1095a467fdc7425408c86f762a6015373cb8e2c1e47dd"
     },
     {
       "path": "docs/status/2026-09-16-initial-reference-implementation.md",
-      "size": 694,
-      "sha256": "2d6b60b8cb66b86a219b9d0d24151b215683d96ab9727092c3ed4098cd5c2535"
+      "size": 743,
+      "sha256": "17e236eb0a7d365bb73610ca320143b0da9faa4a02d92537854728d173bfbcb5"
     },
     {
       "path": "docs/status/2026-09-16-runtime-pack-portable-conformance.md",
-      "size": 676,
-      "sha256": "011e2d2f6525e57bc48f575c47fdf86aecb838de60010a609656965db7b98746"
+      "size": 725,
+      "sha256": "0f7adc80dca1b28ef4c0c8700fe30f875c0bed35edc0ae5036ac5e36de49d952"
     },
     {
       "path": "docs/status/2026-09-28-referent-registry-conformance.md",
-      "size": 614,
-      "sha256": "381336e9b8e76b8e0d6208baa96ac9e5ceed57a581cc3d958f36de9a35673bef"
+      "size": 663,
+      "sha256": "4623d63fd1fd6da9b3d4455c561144408b6174c0acbb76bcea021ea78f3208f2"
+    },
+    {
+      "path": "docs/status/2026-10-01-kristal-v6.md",
+      "size": 299,
+      "sha256": "8bf429582885b55a42eba75b097e1b3f7a892e4d595dfbdf2f41d6ea092897aa"
+    },
+    {
+      "path": "fixtures/v6/kristal-state.example.json",
+      "size": 2234,
+      "sha256": "29d5f8193cd5751e03e40f5e3ff3bd6d66dd533307cb1543a94b7ab145f6c69f"
     },
     {
       "path": "package.json",
-      "size": 342,
-      "sha256": "db9a84f1487223cfb343595591e2c02c5ed8fdb84f20ae113d885ac4342c51cd"
+      "size": 436,
+      "sha256": "2cd019f065821944b511279cf508d65eae48f53afb17206acc0401b1cab6b779"
     },
     {
       "path": "src/cli.mjs",
-      "size": 4344,
-      "sha256": "c3af909be77ab6352866e4f66c7c4ad08a34a38698884b5d49a56c66faa9b233"
+      "size": 5013,
+      "sha256": "85037be871ec2b75a4501631d84cb965520e54d5f0927c87b18e0a78702f3a49"
     },
     {
       "path": "src/exchange.mjs",
@@ -94,6 +119,11 @@
       "sha256": "689228ce698447ca5470ab475780f1ddef318c4eb1709f7e33b72faabe595144"
     },
     {
+      "path": "src/kristal_state.mjs",
+      "size": 8060,
+      "sha256": "87a1838397cd0cf1520c810d40e64f12696bd1a12720125c5e363b151ecfd3c9"
+    },
+    {
       "path": "src/referent_registry.mjs",
       "size": 6078,
       "sha256": "ecded38eeffdfd6e3b757bbe656f345ef3202a2c54e47e549b30e25a746c7501"
@@ -117,6 +147,11 @@
       "path": "tests/run_tests.mjs",
       "size": 7920,
       "sha256": "5457b1fb835d04e16b97a5fc6411b5fb94e0968e8fe798b3d198266fcf11b07d"
+    },
+    {
+      "path": "tests/run_v6_tests.mjs",
+      "size": 2446,
+      "sha256": "6608e4dc1a35a3300e47b62e3dbaf3e6fad79074dbad0bcbe4dbf8a51d32c8f9"
     }
   ]
 }

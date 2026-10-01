@@ -1,5 +1,7 @@
 # Runtime Pack portable conformance
 
+**Status: Historical v5 compatibility record.**
+
 **Date:** 2026-09-16  
 **Reference implementation:** `0.2.0`
 

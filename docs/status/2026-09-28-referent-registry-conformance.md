@@ -1,5 +1,7 @@
 # Referent Registry conformance — 2026-09-28
 
+**Status: Historical v5 compatibility record.**
+
 Kristal Reference `0.3.0` adds executable checks for the Kristal `5.0.0-rc.3` Referent Registry `1.0.0` and the frozen `kristal.knowledge-model-contract/v1` bundle.
 
 The adapter verifies the framework example, rejects an out-of-contract core kind, rejects a non-namespaced external identifier used as an internal `ref`, and verifies the downstream knowledge-model bundle pin:

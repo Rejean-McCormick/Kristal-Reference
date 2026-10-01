@@ -1,80 +1,63 @@
 # Kristal Reference
 
-External reference implementation and executable conformance adapter for Kristal v5.
+External reference/conformance adapter for **Kristal Standard v6**.
 
-This repository is intentionally separate from `kristal-framework` and `levelupdiag_kristal`. It implements observable build/verify behavior against the framework's published contracts and vectors without moving implementation code into the normative framework repository.
-
-## Expected layout
-
-```text
-C:\mycode\Kristal\
-├─ kristal-framework\
-├─ levelupdiag_kristal\
-└─ kristal-reference\
-```
+The primary commands now target `kristal_state` and the v6 semantic model. Older Exchange/Runtime Pack commands remain present as explicit **legacy v5 compatibility helpers**; they are not the conceptual center of the adapter.
 
 ## Requirements
 
 - Node.js 22+
 - no npm dependencies
 
-## Self-test
+## v6 commands
+
+```text
+node bin/kristal-ref.mjs state-id <kristal-state.json>
+node bin/kristal-ref.mjs verify-state <kristal-state.json> [--require-identity]
+node bin/kristal-ref.mjs summarize-state <kristal-state.json>
+```
+
+The verifier checks the main v6 invariants used by ecosystem consumers:
+
+- `schema_version = 6.0`;
+- `artifact_type = kristal_state`;
+- typed `valuations[]`;
+- value-state separation (`unknown`/`not_applicable` are not numeric values);
+- supported `record_role` and `actionability` modes;
+- canonical state identity/content hash using `kristal.v6:jcs-rfc8785`.
+
+It intentionally does not manufacture authority or infer `automatic` from a high valuation.
+
+## Self-contained v6 tests
 
 ```powershell
-cd C:\mycode\Kristal\kristal-reference
 npm test
 ```
 
-The tests consume the official vectors and examples from the sibling `kristal-framework` repository. Override the path with `KRISTAL_FRAMEWORK` when necessary.
+The v6 tests use `fixtures/v6/kristal-state.example.json` and do not require a sibling framework checkout.
 
-## Adapter CLI
+## Legacy v5 compatibility
 
-```powershell
-node bin\kristal-ref.mjs exchange-id <exchange.json>
-node bin\kristal-ref.mjs verify-exchange <exchange.json>
-node bin\kristal-ref.mjs build-runtime-pack <request.json> <output-dir>
-node bin\kristal-ref.mjs verify-runtime-pack <manifest.json> <payload-dir>
-node bin\kristal-ref.mjs verify-runtime-profile <portable-vectors.json>
-node bin\kristal-ref.mjs verify-signature <fixture.json>
-node bin\kristal-ref.mjs verify-trust <fixture.json>
-node bin\kristal-ref.mjs verify-referent-registry <referent-registry.json>
-node bin\kristal-ref.mjs verify-knowledge-model-contract <knowledge-model-contract.json> [framework-root]
-```
-
-All verification commands exit `0` on acceptance and `1` on a conformance/integrity rejection. Invocation/runtime errors exit `2`.
-
-## Implemented scope
-
-The reference implementation currently covers:
-
-- RFC 8785/JCS canonicalization used by the published vectors;
-- `kristal.v5:exchange-id-core@1` identity;
-- declared Exchange ID/content-hash verification;
-- `kristal.v5:runtime-pack-id-core@1` identity;
-- Runtime Pack file hash/size verification;
-- deterministic minimal Runtime Pack materialization from the official vector/request shape;
-- portable Runtime Pack conformance vectors;
-- Ed25519 signature verification;
-- minimal trust-root validity and key-revocation evaluation;
-- structural verification of `kristal.referent-registry/1.0.0` against the frozen rc.3 field/kind contract;
-- verification of the `kristal.knowledge-model-contract/v1` bundle identity and its declared framework file hashes.
-
-`kristal-reference` does not define Kristal semantics. When its behavior conflicts with the normative framework contract, the framework is authoritative and the reference implementation must be corrected.
-
-## Referent Registry
-
-The reference adapter verifies that a registry uses stable namespaced internal refs, the frozen shallow kind vocabulary, valid label/external-ID structures and the rc.3 profile metadata. It deliberately does **not** invent domain-specific subclasses such as `organization` as new core kinds. Those belong in classifications/extensions.
-
-The adapter also checks the exact frozen rc.3 knowledge-model bundle used by downstream consumers:
+The following commands remain for old consumers:
 
 ```text
-sha256:07fe0527ab29a4b40870efdd0c9e0c67c91de919e5428047245b2a2c04f8ea98
+exchange-id
+verify-exchange
+build-runtime-pack
+verify-runtime-pack
+verify-runtime-profile
+verify-signature
+verify-trust
+verify-referent-registry
+verify-knowledge-model-contract
 ```
 
-## Runtime Pack portable conformance
-
-The reference implementation executes `kristal.v5:runtime-pack-portable-conformance@1` and independently reproduces the official RP-2 through RP-5 golden bytes for ordered JSONL, fixed-row group descriptors, KBF1 Bloom filters, and canonical 32-bit Roaring portable serialization.
+Legacy tests can be run only when the matching v5 framework/vector tree is available:
 
 ```powershell
-node bin\kristal-ref.mjs verify-runtime-profile ..\kristal-framework\docs\Technical-Reference\kristal-docs-v5\09-test-vectors\runtime-pack\portable-vectors.json
+npm run test:legacy-v5
 ```
+
+## Authority boundary
+
+`kristal-reference` verifies structure/integrity. It does not define domain truth, legal authority, organizational policy or execution permission.

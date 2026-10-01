@@ -1,14 +1,15 @@
 {
   "name": "kristal-reference",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
-  "description": "External reference implementation and conformance adapter for Kristal v5.",
+  "description": "External reference and conformance adapter for Kristal Standard v6, with explicit legacy v5 compatibility helpers.",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node tests/run_tests.mjs",
-    "self-test": "node bin/kristal-ref.mjs self-test"
+    "test": "node tests/run_v6_tests.mjs",
+    "self-test": "node bin/kristal-ref.mjs self-test",
+    "test:legacy-v5": "node tests/run_tests.mjs"
   }
 }

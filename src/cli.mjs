@@ -8,6 +8,7 @@ import { verifySignatureFixture, verifyTrustFixture } from './security.mjs';
 import { verifyPortableVector } from './runtime_pack_portable.mjs';
 import { verifyReferentRegistry } from './referent_registry.mjs';
 import { verifyKnowledgeModelContract } from './knowledge_model_contract.mjs';
+import { stateIdentity, verifyKristalState, summarizeKristalState } from './kristal_state.mjs';
 import { readJson, printJson, unwrapVector } from './io.mjs';
 
 function die(message, code = 2) {
@@ -28,6 +29,20 @@ function resultExit(result) {
 export async function main(argv = process.argv.slice(2)) {
   const [command, ...args] = argv;
   switch (command) {
+    case 'state-id': {
+      const file = requireArg(args, 0, 'Kristal State JSON');
+      printJson(stateIdentity(readJson(file)));
+      return;
+    }
+    case 'verify-state': {
+      const file = requireArg(args, 0, 'Kristal State JSON');
+      return resultExit(verifyKristalState(readJson(file), { requireIdentity: args.includes('--require-identity') }));
+    }
+    case 'summarize-state': {
+      const file = requireArg(args, 0, 'Kristal State JSON');
+      printJson(summarizeKristalState(readJson(file)));
+      return;
+    }
     case 'exchange-id': {
       const file = requireArg(args, 0, 'input JSON');
       const doc = unwrapVector(readJson(file));
@@ -101,6 +116,6 @@ export async function main(argv = process.argv.slice(2)) {
       return;
     }
     default:
-      die('usage: kristal-ref <exchange-id|verify-exchange|build-runtime-pack|verify-runtime-pack|verify-runtime-profile|verify-signature|verify-trust|verify-referent-registry|verify-knowledge-model-contract|self-test> ...');
+      die('usage: kristal-ref <state-id|verify-state|summarize-state|exchange-id|verify-exchange|build-runtime-pack|verify-runtime-pack|verify-runtime-profile|verify-signature|verify-trust|verify-referent-registry|verify-knowledge-model-contract|self-test> ...');
   }
 }

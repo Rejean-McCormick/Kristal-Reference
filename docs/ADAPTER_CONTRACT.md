@@ -1,69 +1,26 @@
-# LevelUpDiag Adapter Contract
+# Kristal Reference Adapter Contract — v6
 
-`kristal-reference` exposes process-level commands so an external diagnostics repository can test the implementation without importing private modules.
+Active adapter version: `0.4.0`.
 
-## Exit codes
+## Primary operations
 
-- `0`: accepted / operation succeeded
-- `1`: artifact or security fixture rejected by the verifier
-- `2`: invocation or internal runtime error
+### `state-id <file>`
+Computes the v6 Kristal State canonical content identity using `kristal.v6:jcs-rfc8785`. The state hash target excludes `state_id`, `content_hash`, and `signatures`.
 
-## Exchange
+### `verify-state <file> [--require-identity]`
+Checks the core v6 structural semantics used by ecosystem consumers: `schema_version=6.0`, `artifact_type=kristal_state`, typed valuations/value states, known record roles/actionability modes and declared state identity when present.
 
-### `exchange-id <input>`
+### `summarize-state <file>`
+Reports assertion count plus record-role, actionability, valuation-semantics and valuation-dimension distributions. This is diagnostic output, not a canonical projection.
 
-Input may be a raw Exchange payload fixture or an official vector object containing `input`.
-The command prints JSON containing `kristal_id`, `sha256_hex`, `canonical`, and `profile`.
+## Fail-closed invariants
 
-### `verify-exchange <input>`
+- non-known value states must not masquerade as numeric/categorical values;
+- probability values must be in `[0,1]`;
+- tampering invalidates a declared content identity;
+- a high/established valuation does not imply `actionability=automatic`;
+- structural verification does not establish domain truth or execution authority.
 
-Recomputes the Exchange identity and verifies declared `kristal_id` and `content_hash`.
+## Legacy compatibility operations
 
-## Runtime Pack
-
-### `build-runtime-pack <request> <output-dir>`
-
-The request may use the official vector shape (`input` + `payloads`) or `manifest` + `payloads`.
-Payload values are base64. The builder writes payload files, updates their SHA-256/size inventory, computes `runtime_pack_id`, and writes `runtime-pack.manifest.json`.
-
-### `verify-runtime-pack <manifest> <payload-dir>`
-
-Verifies the Runtime Pack identity plus every declared payload SHA-256 and size.
-
-
-### `verify-runtime-profile <portable-vectors>`
-
-Executes `kristal.v5:runtime-pack-portable-conformance@1` vectors and independently reproduces the expected RP-2 through RP-5 bytes. The result JSON includes one entry per vector with exact SHA-256/base64 comparison and semantic checks.
-
-## Security
-
-### `verify-signature <fixture>`
-
-Fixture fields:
-
-```json
-{
-  "algorithm": "ed25519",
-  "public_key_pem": "...",
-  "message_base64": "...",
-  "signature_base64": "..."
-}
-```
-
-### `verify-trust <fixture>`
-
-Trust fixtures contain a verification instant, key ID, signature material, trust roots, and optional revocations. The verifier rejects missing roots, not-yet-valid keys, expired keys, effective revocations, and invalid signatures.
-
-## Referent Registry
-
-### `verify-referent-registry <registry>`
-
-Validates the frozen `kristal.referent-registry/1.0.0` structural contract without importing framework implementation code. It checks the rc.3 profile metadata, stable namespaced refs, shallow kind vocabulary, labels, external identifiers and closed-object fields.
-
-The command does not create domain ontology. A domain-specific classification may appear in `classifications` or extensions but is not accepted as a new core `kind`.
-
-## Knowledge-model bundle
-
-### `verify-knowledge-model-contract <contract> [framework-root]`
-
-Recomputes the content-addressed bundle ID for `kristal.knowledge-model-contract/v1` and, when a framework root is supplied or inferred, verifies every listed file SHA-256 and byte size.
+Exchange/Runtime Pack and older knowledge-model helpers remain in the binary for historical consumers. They are explicitly v5 compatibility surfaces and are not exercised by the default v6 test suite.
